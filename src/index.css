@@ -19,3 +19,7 @@
 body {
   padding: 3rem 5rem;
 }
+.field {
+  display: flex;
+  justify-content: space-between;
+}

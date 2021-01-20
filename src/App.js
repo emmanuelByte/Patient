@@ -3,9 +3,11 @@ import React, { useState, useEffect } from "react";
 import { Table, TableHead, TableBody, TableFoot, NEXT_PREV } from "./elements";
 import uniqid from "uniqid";
 import Category from "./Components/Category";
+import Search from "./Components/Search";
 export default function App() {
   const [api, setApi] = useState([]);
   const [counter, setCounter] = useState(0);
+
   // eslint-disable-next-line
   const rows = [
     "S/N",
@@ -27,9 +29,11 @@ export default function App() {
         "https://api.enye.tech/v1/challenge/records"
       );
       data = data.records.profiles;
+      window.localStorage.setItem("api", JSON.stringify(data));
       setApi(data);
     } catch (error) {
       console.log(error.message);
+      setApi(JSON.parse(window.localStorage.getItem("api")));
     }
   };
   useEffect(() => {
@@ -47,7 +51,10 @@ export default function App() {
   };
   return (
     <>
-      <Category api={api} setApi={setApi} />{" "}
+      <div className="field">
+        <Category api={api} setApi={setApi} />
+        <Search api={api} />
+      </div>
       <Table rows={rows}>
         <TableHead>
           <tr>
@@ -83,7 +90,7 @@ export default function App() {
             onClick={() => handleCount("prev")}
             prev={true && 1}
           />{" "}
-          <NEXT_PREV onClick={() => handleCount("next")} />{" "}
+          <NEXT_PREV next onClick={() => handleCount("next")} />{" "}
         </div>{" "}
       </TableFoot>{" "}
     </>

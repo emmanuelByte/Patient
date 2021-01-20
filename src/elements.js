@@ -4,7 +4,6 @@ import { IoIosArrowForward } from "react-icons/io";
 const Table = styled.table`
   width: 80%;
   border-collapse: collapse;
-  margin: 25px 0;
   width: fit-content;
   margin: 3rem 0;
 
@@ -55,68 +54,71 @@ export const TableFoot = styled.div`
   cursor: pointer;
 `;
 export const Filter = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   cursor: pointer;
-  position: relative;
+  column-gap: 1rem;
+  justify-items: center;
+  .head {
+    display: ${({ drop }) => (drop ? "flex" : "none")};
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 `;
 
 export const FilterIcon = styled(FcFilledFilter)``;
-
-export const NEXT_PREV = styled(IoIosArrowForward)`
-  transform: ${({ prev }) => prev && "rotate(180deg)"};
-`;
-export const Cat = styled.ul`
-  list-style: none;
-  width: fit-content;
-  padding: 1rem;
-  display: ${({ click }) => (click ? "flex" : "none")};
-  row-gap: 1rem;
-
-  flex-direction: column;
-  background-color: #fff;
-`;
-export const CatItem = styled.li`
-  position: relative;
+export const FBrand = styled.div`
   display: flex;
-  column-gap: 2rem;
-  align-items: baseline;
-
-  .d {
-    transform: translate(20%, -20%);
-
-    display: flex;
-    flex-direction: column;
-    row-gap: 1rem;
+  column-gap: 0.4rem;
+`;
+export const FBody = styled.div`
+  .head {
+    margin-bottom: 1rem;
   }
-  .div1 {
-    display: none;
+  .head:hover {
+    border-bottom: 2px solid var(--aux);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
   &:hover {
-    p {
-      background-color: blue;
-    }
-    padding: ${({ gen }) => (gen ? "1rem 2rem 1rem 0" : "1rem 1rem 1rem 0")};
-    .div1 {
-      display: flex;
-      flex-direction: column;
-      row-gap: 1rem;
-    }
-    .div2 {
-      display: flex;
-      flex-direction: column;
-      row-gap: 1rem;
+    .data {
+      display: ${({ drop }) => drop && "block"};
+      font-size: 0.9rem;
+      text-transform: capitalize;
     }
   }
-  .div2 {
+`;
+export const FRow = styled.div`
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  .data {
     display: none;
+    padding: 0.5rem 1.5rem;
+  }
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+`;
+export const FData = styled.div`
+  &:not(.head):hover {
+    background-color: var(--sec);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
 `;
-export const ListItem = styled.div`
-  /* right: 0;
-  top: 0; */
-`;
-export const Search = styled.div`
-  padding: 2rem 5rem;
-  border-radius: 50%;
 
+export const NEXT_PREV = styled(IoIosArrowForward)`
+  transform: ${({ src, next }) => !src && !next && "rotate(90deg)"};
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform: ${({ prev }) => prev && "rotate(180deg)"};
 `;
-export const Input=styled(Search)
+export const SearchDiv = styled.div`
+  padding: 0.5rem 1.2rem;
+  border-radius: 10px;
+  width: 20%;
+  height: fit-content;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+`;
+export const Input = styled.input`
+  border: none;
+  outline: none;
+`;
